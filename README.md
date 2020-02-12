@@ -132,9 +132,18 @@ to external IPs. For the workers we would probably need to have several pods, ea
 message broker and will be responsible for the handling of a specific task.
 
 ## What might change about your solution if this application needed to run automatically for each hour of the day?
-To do so, the best solution would be to use a tool such as Apache Airflow, or Luigi. 
-We would create a DAG, and schedule it to run on an hourly basis. The DAG would be made of a single pod operator. 
+To do so, the best solution would be to use a tool such as Apache Airflow, or Luigi.
+We would create a DAG, and schedule it to run on an hourly basis. 
+The DAG would be made of a single pod operator that could run on a Kubernetes cluster. 
 This pod would be schedule to run on a node, execute the export task, then kill itself.
+
+This pod could do one of the following : 
+
+- A first solution could be to make a call to the API that we have created. The API being on an other cluster
+and reachable by our pod.
+- An other solution could be to only launch the worker with the desired date on the pod, as we do not really 
+need the API.
+
 
 ## How would you test this application?
 
