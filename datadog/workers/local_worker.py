@@ -3,15 +3,18 @@ from datadog.clients.wikimedia import WikimediaDownloader
 from datadog.workers.base import Worker
 from datadog.utils.constants import FAILED, SUCCESS
 
+import time
+
 class LocalConsumer(Worker):
 
     def __init__(self, *args, **kwargs):
-        super(LocalConsumer, self).__init__(**kwargs)
+        super(LocalConsumer, self).__init__(*args, **kwargs)
         self.wikimedia_downloader = WikimediaDownloader()
         self.wikimedia_downloader.download_blacklist()
 
     def run(self):
         while True:
+            time.sleep(5)
             if not self.queue.empty():
 
                 try:
