@@ -9,6 +9,9 @@ class WikimediaDownloader:
     It also provides some method to aggregate, filter the output of the download.
     """
 
+    def __init__(self):
+        self.blacklist = None
+
     URL = 'https://dumps.wikimedia.org/other/pageviews/{year}/{year}-{month}/pageviews-{dsnodash}-{hour}0000.gz'
     COLUMNS = ["domain_code", "page_title", "count_views", "total_response_size"]
     BLACKLIST_URL = "https://s3.amazonaws.com/dd-interview-data/data_engineer/wikipedia/blacklist_domains_and_pages" #TODO ADD IN CONFIG
