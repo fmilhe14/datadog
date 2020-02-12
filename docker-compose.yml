@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/usr/src/app/data
+    command: python -m datadog
+
+  test-unit:
+    build: .
+    command: py.test -s tests tests/unit -vv
+
