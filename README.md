@@ -119,3 +119,5 @@ Furthermore, we should also test the case where the report has already been comp
 A better move could be to distribute the computation on several nodes. We could do a simple 
 map reduce job (map on the pair (domain, page)) to obtain such elements : [(.de, page), [1,3,4,5]], reduce it to get
 the count views. After that we could just group on the domain key and take the 25 top values.
+
+This job could be triggered via our worflow management system (airflow, luigi) every hour.
