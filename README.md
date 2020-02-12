@@ -63,6 +63,38 @@ curl -X GET \
 }'
 ```
 
+If you wish to know the state of a certain task : 
+
+```
+curl -X GET \
+  http://127.0.0.1:8080/get_task_state \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 466fbce9-bf73-4bcf-afa8-b5a2c00556eb' \
+  -H 'cache-control: no-cache' \
+  -d '{
+	"date": "2020010115"
+}'
+```
+
+If the task has been created, the output will look like : 
+
+```
+{
+    "data_path": "./data/reports/2020-01-01 15:00:00.csv",
+    "date": "2020010115",
+    "max_tries": 1,
+    "status": "success",
+    "try_count": 0
+}
+```
+
+Otherwise, you will get prompted this message : 
+
+```
+{
+    "message": "This task does not exist"
+}
+```
 
 If you wish to launch the tests : 
 

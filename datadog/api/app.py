@@ -64,5 +64,27 @@ def create_app(queue, db):
             to_process=to_process
         )
 
+    @app.route('/get_task_state', methods=["GET"])
+    def get_task_state():
+        request_content = request.json
+
+        if "date" not in request_content:
+            return jsonify(
+                status_code=404,
+                message="Start date should be provided"
+            )
+
+        date = datetime.strptime(request_content.get("date"), DATE_FORMAT_WITH_HOURS)
+        doc = app.config['DB'].get(date)
+
+        if doc:
+            return jsonify(
+                **doc
+            )
+
+        return jsonify(
+            message="This task does not exist"
+        )
+
     return app
 
