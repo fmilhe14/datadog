@@ -17,9 +17,20 @@ And, in order to get the state of a task, flask application and workers write in
 
 # How to run the code ? 
 
-In order to launch the API : 
+In order to launch the API:
+
+- If you have docker, docker-compose :  
 
 `make run`
+
+- Otherwise: 
+
+```
+virtualenv --no-site-packages -p python3 venv
+source venv/bin/activate
+pip install -r requirements.txt
+python -m datadog
+```
 
 If you wish to test it, here some curl examples : 
 
@@ -55,7 +66,20 @@ curl -X GET \
 
 If you wish to launch the tests : 
 
+- If you have docker, docker-compose :  
+
+
 `make test`
+
+
+- Otherwise : 
+
+```
+virtualenv --no-site-packages -p python3 venv
+source venv/bin/activate
+pip install -r requirements.txt
+py.test -s tests tests/unit -vv
+```
 
 # Additional questions :
 
