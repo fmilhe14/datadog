@@ -162,3 +162,5 @@ map reduce job (map on the pair (domain, page)) to obtain such elements : [(.de,
 the count views. After that we could just group on the domain key and take the 25 top values.
 
 This job could be triggered via our worflow management system (airflow, luigi) every hour.
+
+This job could be written using Apache Spark or Apache Beam.
