@@ -15,6 +15,8 @@ Flask -> Queue -> Workers -> Local Storage
 And, in order to get the state of a task, flask application and workers write in a Document oriented database 
 (in our development case, a TinyDB)
 
+- FYI : Some reports pre aggregated are available in the data/reports folder.
+
 # How to run the code ? 
 
 In order to launch the API:
