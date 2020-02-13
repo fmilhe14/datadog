@@ -34,7 +34,10 @@ class LocalConsumer(Worker):
 
                         print(f"Successfully exported for date {date}")
 
-                        self.db.update(date, {"status": SUCCESS, "data_path": path})
+                        try_count = task.get("try_count")
+                        try_count += 1
+
+                        self.db.update(date, {"status": SUCCESS, "data_path": path, "try_count": try_count})
 
                 except Exception as err:
                     print(f"An issue occurred while consuming {message} : {err}")
@@ -42,7 +45,7 @@ class LocalConsumer(Worker):
                     try_count = task.get("try_count")
                     max_tries = task.get("max_tries")
 
-                    if try_count < max_tries:
+                    if try_count <= max_tries:
                         print(f"Message {message} will be reprocessed as it failed {try_count} and did not"
                               f" reached the {max_tries} limit")
                         self.db.update(date, {"status": FAILED, "try_count": try_count + 1})
